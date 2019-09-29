@@ -34,10 +34,13 @@ function List() {
 /**
  * Adds a new element to the list.
  *
- * @param {*} element
+ * @param {...*} elements
  */
-List.prototype.append = function (element) {
-    this.dataStore[this.listSize++] = element;
+List.prototype.append = function (elements) {
+    let len = arguments.length;
+    for (let i = 0; i < len; i++) {
+        this.dataStore[this.listSize++] = arguments[i];
+    }
 };
 
 /**
@@ -66,6 +69,7 @@ List.prototype.remove = function (element) {
     if (foundAt > -1) {
         this.dataStore.splice(foundAt, 1);
         --this.listSize;
+        if (this.pos === this.listSize) --this.pos;
         return true;
     }
     return false;
@@ -115,6 +119,7 @@ List.prototype.clear = function () {
 };
 
 /**
+ * Determine whether the list contains a given element.
  *
  * @param element
  * @return {boolean}
@@ -128,80 +133,83 @@ List.prototype.contains = function (element) {
     return false;
 };
 
-// 将标识位移至列表开头
+/**
+ *  Shifts the flag bit to the front of the list.
+ */
 List.prototype.front = function () {
     this.pos = 0;
 };
 
-// 将标识位移至列表末尾
+/**
+ * Shifts the flag bit to the end of the list.
+ */
 List.prototype.end = function () {
     this.pos = this.listSize - 1;
 };
 
-// 向前移动标识位
+/**
+ * Shifts the flag bit forward.
+ */
 List.prototype.prev = function () {
     if (this.pos > -1) {
         --this.pos;
     }
 };
 
-// 向后移动标识位
+/**
+ * Shifts the flag bit backward.
+ */
 List.prototype.next = function () {
     if (this.pos < this.listSize) {
         ++this.pos;
     }
 };
 
-// 获取标识位当前位置
+/**
+ * Gets the current position of the flag bit.
+ * @return {number}
+ */
 List.prototype.currPos = function () {
     return this.pos;
 };
 
-// 将标识位移至给定位置
+/**
+ * Moves the flag bit to a given position.
+ *
+ * @param position
+ * @return {boolean}
+ */
 List.prototype.moveTo = function (position) {
     if (position > -1 && position < this.listSize) {
         this.pos = position;
-        return ture;
+        return true;
     }
     return false;
 };
 
-// 获取标识位上的元素
+/**
+ * Gets the element that the current flag bit points to.
+ *
+ * @return {*}
+ */
 List.prototype.getElement = function () {
     return this.dataStore[this.pos];
 };
 
-// 判断是否存在下一位
+/**
+ * Determine if the next digit exists in the list.
+ *
+ * @return {boolean}
+ */
 List.prototype.hasNext = function () {
     return this.pos < this.listSize;
 };
 
-// 判断是否存在上一位
+/**
+ * Determine if the previous digit exists in the list.
+ *
+ * @return {boolean}
+ */
 List.prototype.hasPrev = function () {
     return this.pos >= 0;
 };
-
-
-
-
-
-let twoSum = function (arr, target) {
-    let len = arr.length;
-    for (let i = 0; i < len; i++) {
-        for (let j = i + 1; j < len; j++) {
-            if (arr[i] + arr[j] === target) {
-                return [i, j];
-            }
-        }
-    }
-    return 'no two sum solution';
-};
-
-let twoSum2 = function (arr, target) {
-    let map = {};
-    let len = arr.length;
-    for (let i = 0; i < len; i++) {
-        map[arr[i]] = i;
-    }
-};
-
