@@ -11,9 +11,9 @@
  * @return {number} random integer
  */
 let genRandomInt = function (min, max) {
-	if (min == null) {min = 0}
-	if (max == null) {max = 100}
-	min = Math.ceil(min);
+    if (min == null) min = 0;
+    if (max == null) max = 100;
+    min = Math.ceil(min);
     max = Math.floor(max);
     return min + Math.floor(Math.random() * (max - min + 1));
 };
@@ -27,12 +27,12 @@ let genRandomInt = function (min, max) {
  * @return {Array} An array of random integers.
  */
 let genRandomArr = function (len, min, max) {
-	let arr = [];
-	while (len > 0) {
-		arr.push(genRandomInt(min, max));
-		--len;
-	}
-	return arr;
+    let arr = [];
+    while (len > 0) {
+        arr.push(genRandomInt(min, max));
+        --len;
+    }
+    return arr;
 };
 
 /**
@@ -42,20 +42,20 @@ let genRandomArr = function (len, min, max) {
  * @return {Array} Sorted array.
  */
 let bubbleSort = function (arr) {
-	console.time('bubbleSort');
-	let len = arr.length;
-	let temp;
-	for (let i = 0; i < len; i++) {
-		for (let j = 0; j < len - 1 - i; j++) {
-			if (arr[j] > arr[j+1]) {
-				temp = arr[j+1];
-				arr[j+1] = arr[j];
-				arr[j] = temp;
-			}
-		}
-	}
-	console.timeEnd('bubbleSort');
-	return arr;
+    console.time('bubbleSort');
+    let len = arr.length;
+    let temp;
+    for (let i = 0; i < len; i++) {
+        for (let j = 0; j < len - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                temp = arr[j + 1];
+                arr[j + 1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+    console.timeEnd('bubbleSort');
+    return arr;
 };
 
 /**
@@ -65,24 +65,24 @@ let bubbleSort = function (arr) {
  * @return {Array} Sorted array.
  */
 let bubbleSort2 = function (arr) {
-	console.time('bubbleSort2');
-	let i = arr.length - 1;
-	let pos;
-	let temp;
-	while (i > 0) {
-		pos = 0;
-		for (let j = 0; j < i; j++) {
-			if (arr[j] > arr[j+1]) {
-				pos = j;
-				temp = arr[j+1];
-				arr[j+1] = arr[j];
-				arr[j] = temp;
-			}
-		}
-		i = pos;
-	}
-	console.timeEnd('bubbleSort2');
-	return arr;
+    console.time('bubbleSort2');
+    let i = arr.length - 1;
+    let pos;
+    let temp;
+    while (i > 0) {
+        pos = 0;
+        for (let j = 0; j < i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                pos = j;
+                temp = arr[j + 1];
+                arr[j + 1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        i = pos;
+    }
+    console.timeEnd('bubbleSort2');
+    return arr;
 };
 
 /**
@@ -92,23 +92,23 @@ let bubbleSort2 = function (arr) {
  * @return {Array} Sorted array.
  */
 let selectionSort = function (arr) {
-	console.time('selectionSort');
-	let len = arr.length;
-	let index;
-	let temp;
-	for (let i = 0; i < len - 1; i++) {
-		index = i;
-		for (let j = i + 1; j < len; j++) {
-			if (arr[index] > arr[j]) {
-				index = j;
-			}
-		}
-		temp = arr[index];
-		arr[index] = arr[i];
-		arr[i] = temp;
-	}
-	console.timeEnd('selectionSort');
-	return arr;
+    console.time('selectionSort');
+    let len = arr.length;
+    let index;
+    let temp;
+    for (let i = 0; i < len - 1; i++) {
+        index = i;
+        for (let j = i + 1; j < len; j++) {
+            if (arr[index] > arr[j]) {
+                index = j;
+            }
+        }
+        temp = arr[index];
+        arr[index] = arr[i];
+        arr[i] = temp;
+    }
+    console.timeEnd('selectionSort');
+    return arr;
 };
 
 /**
@@ -118,24 +118,24 @@ let selectionSort = function (arr) {
  * @return {Array} Sorted array.
  */
 let selectionSort2 = function (arr) {
-	console.time('selectionSort2');
-	let len = arr.length;
-	let index, temp;
-	for (let i = 0; i < len - 1; i++) {
-		index = i;
-		for (let j = i + 1; j < len; j++) {
-			if (arr[index] > arr[j]) {
-				index = j;
-			}
-		}
-		if (i !== index) {
-			temp = arr[index];
-			arr[index] = arr[i];
-			arr[i] = temp;
-		}
-	}
-	console.timeEnd('selectionSort2');
-	return arr;
+    console.time('selectionSort2');
+    let len = arr.length;
+    let index, temp;
+    for (let i = 0; i < len - 1; i++) {
+        index = i;
+        for (let j = i + 1; j < len; j++) {
+            if (arr[index] > arr[j]) {
+                index = j;
+            }
+        }
+        if (i !== index) {
+            temp = arr[index];
+            arr[index] = arr[i];
+            arr[i] = temp;
+        }
+    }
+    console.timeEnd('selectionSort2');
+    return arr;
 };
 
 /**
