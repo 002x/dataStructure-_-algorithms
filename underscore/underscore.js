@@ -20,13 +20,14 @@
     // 将原来全局环境中的变量 `_` 赋值给变量 previousUnderscore 进行缓存
     // 在后面的 noConflict 方法中有用到
     var previousUnderscore = root._;
-    console.log(previousUnderscore);
 
     // Save bytes in the minified (but not gzipped) version:
     // 缓存变量, 便于压缩代码
     // 此处「压缩」指的是压缩到 min.js 版本
     // 而不是 gzip 压缩
-    var ArrayProto = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype;
+    var ArrayProto      = Array.prototype,
+        ObjProto        = Object.prototype,
+        FuncProto       = Function.prototype;
 
     // Create quick reference variables for speed access to core prototypes.
     // 缓存变量, 便于压缩代码
