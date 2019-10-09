@@ -214,3 +214,106 @@ class D extends C {
 }
 let c = new C(); // logs class C {constructor () { console.log(new.target); }}
 let d = new D(); // logs class D {constructor () { super(); }}
+
+/**
+ * Computable member name.
+ */
+let methodName = 'sayName';
+class PersonClassA {
+    constructor (name) {
+        this.name = name;
+    }
+    [methodName] () {
+        return this.name;
+    }
+}
+let PA = new PersonClassA('A');
+PA.sayName(); // logs 'A'.
+
+let propertyName = 'html';
+class CustomHTMLElementS {
+    constructor(element) {
+        this.element = element;
+    }
+    get [propertyName] () {
+        return this.element.innerHTML;
+    }
+    set [propertyName] (value) {
+        this.element.innerHTML = value;
+    }
+}
+let CHES = new CustomHTMLElementS(document.body);
+let element = CHES.html;
+CHES.html = 'HTML';
+
+/**
+ * Static method.
+ */
+// ES5
+function PersonSM1 (name) {
+    this.name = name;
+}
+PersonSM1.prototype.sayName = function () {
+    return this.name;
+};
+PersonSM1.create = function (name) {
+    return new PersonSM1(name);
+};
+let psm1a = new PersonSM1('psm1a');
+let psm1b = PersonSM1.create('psm1b');
+// ES6
+class PersonSM2 {
+    // This is equivalent to the constructor of the PersonSM1 class.
+    constructor (name) {
+        this.name = name;
+    }
+    // This is equivalent to the PersonSM1.prototype.sayName().
+    sayName () {
+        return this.name;
+    }
+    // This is equivalent to the PersonSM1.create().
+    static create (name) {
+        return new PersonSM1(name);
+    }
+}
+let psm2a = new PersonSM2('psm2a');
+let psm2b = PersonSM2.create('psm2b');
+
+/**
+ * Extends and derived class.
+ */
+// ES5
+function Rectangle5 (length, width) {
+    this.length = length;
+    this.width = width;
+}
+Rectangle5.prototype.getArea = function () {
+    return this.length * this.width;
+};
+function Square5 (length) {
+    Rectangle5.call(this, length, length);
+}
+Square5.prototype = Object.create(Rectangle5.prototype, {
+    constructor: {
+        value: Square5,
+        enumerable: true,
+        writable: true,
+        configurable: true
+    }
+});
+// ES6
+class Rectangle6 {
+    constructor (length, width) {
+        this.length = length;
+        this.width = width;
+    }
+    getArea () {
+        return this.length * this.width;
+    }
+}
+class Square6 extends Rectangle6 {
+    constructor(length) {
+        // This is equivalent to the Rectangle.call(this, length, length) in Square5.
+        super(length, length);
+    }
+}
