@@ -177,3 +177,40 @@ let CustomHTMLElement2 = (function () {
     return CustomHTMLElement2;
 }());
 
+/**
+ * new.target
+ */
+function Foo () {
+    if (!new.target) {
+        throw new Error('Foo() must be called with keyword new');
+    }
+    console.log('Foo instantiated with new');
+}
+Foo(); // throws 'Foo() must be called with keyword new'.
+new Foo(); // logs 'Foo instantiated with new'.
+
+class A {
+    constructor () {
+        console.log(new.target.name);
+    }
+}
+class B extends A {
+    constructor () {
+        super();
+    }
+}
+let a = new A(); // logs 'A'.
+let b = new B(); // logs 'B'.
+
+class C {
+    constructor () {
+        console.log(new.target);
+    }
+}
+class D extends C {
+    constructor () {
+        super();
+    }
+}
+let c = new C(); // logs class C {constructor () { console.log(new.target); }}
+let d = new D(); // logs class D {constructor () { super(); }}
